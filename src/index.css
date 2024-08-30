@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html, body, #root {
+    height: 100%;
+    @apply bg-slate-100;
+}
+
+#root {
+    @apply flex flex-col;
+}
+
+input {
+    @apply border p-1;
+}
