@@ -2,8 +2,9 @@ import './Footer.css';
 
 
 function Footer() {
-    return(
-        <div>I'm footer.</div>
+    return (
+        <div
+            className={"flex flex-row justify-center items-center gap-3 pl-5 pr-5 pt-3 pb-3 bg-slate-600 text-slate-200 sticky bottom-0 z-50"}>PiresLabs.com</div>
     );
 }
 
