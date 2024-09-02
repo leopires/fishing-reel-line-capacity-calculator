@@ -12,5 +12,5 @@ html, body, #root {
 }
 
 input {
-    @apply border p-1;
+    @apply border border-slate-300 rounded-md p-1;
 }
