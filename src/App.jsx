@@ -22,11 +22,11 @@ function App() {
         let lineDiameterAsFloat = parseFloat(lineDiameter);
         let lineLengthAsFloat = parseFloat(lineLength);
         if ((lineDiameterAsFloat < 0.15) || (lineDiameterAsFloat > 1.0)) {
-            setErrorMessage('Bitola da linha inválida. Ela deve ser menor ou igual a 0,90.');
+            setErrorMessage('Bitola da linha inválida. Valores válidos precisam estar entre 0.15 e 0.90 milímetros.');
             return;
         }
         if (lineLengthAsFloat <= 0) {
-            setErrorMessage('Capacidade de linha inválida.')
+            setErrorMessage('Capacidade de linha inválida. Deve ser maior que 0.')
             return;
         }
         let items = [];
@@ -46,6 +46,49 @@ function App() {
             <Header/>
             <MainContent className="flex-grow">
                 <>
+                    <div className={"bg-slate-300 pl-3 pr-3 pt-2 pb-2 border border-slate-400 rounded-md"}>
+                        <div onClick={() => {
+                            if (showHelp === 'hidden') {
+                                setShowHelp('block mt-3');
+                            } else {
+                                setShowHelp('hidden');
+                            }
+                        }} className={"flex flex-row text-slate-700 hover:cursor-pointer"}>
+                            <div className={"flex-1"}>
+                                <h3 className={'text-xl font-semibold'}>Sobre este aplicativo</h3>
+                            </div>
+                            <div>
+                                {showHelp === 'hidden' ?
+                                    (
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                             strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                  d="m8.25 4.5 7.5 7.5-7.5 7.5"/>
+                                        </svg>) : (
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                             strokeWidth={1.5}
+                                             stroke="currentColor" className="size-6">
+                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                  d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+                                        </svg>
+                                    )
+                                }
+                            </div>
+                        </div>
+                        <div className={showHelp}>
+                            <p>Este aplicativo tem como objetivo fornecer um cálculo estimado da capacidade de linha em
+                                carretilhas e molinetes, para uma determinada bitola de linha.</p>
+                            <p>Para fazer o cálculo, basta seguir os seguintes passos:</p>
+                            <ul className={"list-decimal list-inside"}>
+                                <li>
+                                    Localizar na caixa do equipamento a capacidade já especificada.
+                                    <img src={"./box_example.jpg"} alt={"Example image."} width={"300"}/>
+                                </li>
+                                <li>1 - Bitola da linha = 0,32mm; 2 - Capacidade: 135m</li>
+                                <li>Preencher os valores e clicar no botão Calcular.</li>
+                            </ul>
+                        </div>
+                    </div>
                     <form>
                         <div className={"flex flex-col gap-2 items-center"}>
                             <div className={"flex flex-col md:flex-row md:justify-center md:items-center gap-3"}>
@@ -67,50 +110,10 @@ function App() {
                             <button
                                 className={"bg-slate-500 text-slate-100 pl-1 pr-1 pt-2 pb-2 w-40 self-center rounded-md shadow-md hover:bg-slate-600 active:bg-slate-700"}
                                 type={"button"}
-                                onClick={calculate}>Calculate
+                                onClick={calculate}>Calcular
                             </button>
                         </div>
                     </form>
-                    <div className={"bg-slate-300 pl-3 pr-3 pt-2 pb-2 border border-slate-400 rounded-md"}>
-                        <div onClick={() => {
-                            if (showHelp === 'hidden') {
-                                setShowHelp('block');
-                            } else {
-                                setShowHelp('hidden');
-                            }
-                        }} className={"flex flex-row text-slate-700 hover:cursor-pointer"}>
-                            <div className={"flex-1"}>
-                                <h3 className={'text-xl font-semibold'}>Informações</h3>
-                            </div>
-                            <div>
-                                {showHelp === 'hidden' ?
-                                    (
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                             strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                            <path strokeLinecap="round" strokeLinejoin="round"
-                                                  d="m8.25 4.5 7.5 7.5-7.5 7.5"/>
-                                        </svg>) : (
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                             strokeWidth={1.5}
-                                             stroke="currentColor" className="size-6">
-                                            <path strokeLinecap="round" strokeLinejoin="round"
-                                                  d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
-                                        </svg>
-                                    )
-                                }
-                            </div>
-                        </div>
-                        <div className={showHelp}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et sollicitudin ligula, eu
-                            gravida quam. Maecenas arcu mi, accumsan ut dui ac, vulputate scelerisque neque. Fusce
-                            malesuada facilisis ornare. Aenean mi sem, porttitor nec magna vel, ullamcorper dapibus
-                            massa. Mauris sit amet elit sed orci posuere auctor. Aenean quis neque tristique sapien
-                            semper ullamcorper. Curabitur at semper ante. Cras interdum ligula elit. Lorem ipsum dolor
-                            sit amet, consectetur adipiscing elit. Integer volutpat porttitor augue, at eleifend nisl
-                            finibus vitae. Pellentesque dignissim lacus urna. Nulla vulputate a ante at cursus. Cras a
-                            eleifend felis. Nunc eleifend magna tellus, ultrices vulputate diam scelerisque in.
-                        </div>
-                    </div>
                     {
                         lineCapacity.length > 0 &&
                         <Table items={lineCapacity}/>
