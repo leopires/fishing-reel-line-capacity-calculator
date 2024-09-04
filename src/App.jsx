@@ -31,7 +31,7 @@ function App() {
         }
         let items = [];
         for (let i = 0.15; i < 0.91;) {
-            let capacidade = calculateLineCapacity(lineDiameterAsFloat, lineLengthAsFloat, i).toFixed(2);
+            let capacidade = Math.round(calculateLineCapacity(lineDiameterAsFloat, lineLengthAsFloat, i)).toFixed(2);
             items.push({
                 bitola: i.toFixed(2),
                 capacidade: capacidade
@@ -79,13 +79,13 @@ function App() {
                             <p>Este aplicativo tem como objetivo fornecer um cálculo estimado da capacidade de linha em
                                 carretilhas e molinetes, para uma determinada bitola de linha.</p>
                             <p>Para fazer o cálculo, basta seguir os seguintes passos:</p>
-                            <ul className={"list-decimal list-inside"}>
-                                <li>
+                            <ul className={"list-decimal list-inside ml-2 mt-4"}>
+                                <li className={"mb-2"}>
                                     Localizar na caixa do equipamento a capacidade já especificada.
-                                    <img src={"./box_example.jpg"} alt={"Example image."} width={"300"}/>
                                 </li>
-                                <li>1 - Bitola da linha = 0,32mm; 2 - Capacidade: 135m</li>
-                                <li>Preencher os valores e clicar no botão Calcular.</li>
+                                <li className={"mb-2"}><img className={"inline-block"} src={"./box_example.jpg"} alt={"Example image."} width={"500"}/></li>
+                                <li className={"mb-2"}><span className={"font-semibold"}>Bitola da linha</span> = 0,32mm / <span className={"font-semibold"}>Capacidade</span> = 135m</li>
+                                <li className={"mb-2"}>Preencher os valores e clicar no botão <span className={"font-semibold"}>Calcular</span>.</li>
                             </ul>
                         </div>
                     </div>
@@ -108,12 +108,15 @@ function App() {
                                 </div>
                             }
                             <button
-                                className={"bg-slate-500 text-slate-100 pl-1 pr-1 pt-2 pb-2 w-40 self-center rounded-md shadow-md hover:bg-slate-600 active:bg-slate-700"}
+                                className={"bg-slate-500 text-slate-100 pl-1 pr-1 pt-2 pb-2 w-40 self-center rounded-md shadow-md hover:bg-slate-600 active:bg-slate-700 font-medium"}
                                 type={"button"}
                                 onClick={calculate}>Calcular
                             </button>
                         </div>
                     </form>
+                    <div className={"text-red-600 text-sm italic text-right"}>
+                        * Os valores calculados são aproximados.
+                    </div>
                     {
                         lineCapacity.length > 0 &&
                         <Table items={lineCapacity}/>
