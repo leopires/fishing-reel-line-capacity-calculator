@@ -21,12 +21,18 @@ function App() {
         setLineCapacity([]);
         let lineDiameterAsFloat = parseFloat(lineDiameter);
         let lineLengthAsFloat = parseFloat(lineLength);
-        if ((lineDiameterAsFloat < 0.15) || (lineDiameterAsFloat > 1.0)) {
+        if ((!lineDiameter) || (lineDiameterAsFloat < 0.15) || (lineDiameterAsFloat > 1.0)) {
             setErrorMessage('Bitola da linha inválida. Valores válidos precisam estar entre 0.15 e 0.90 milímetros.');
+            if (!lineDiameter) {
+                setLineDiameter('0');
+            }
             return;
         }
-        if (lineLengthAsFloat <= 0) {
-            setErrorMessage('Capacidade de linha inválida. Deve ser maior que 0.')
+        if ((!lineLength) || (lineLengthAsFloat <= 0)) {
+            setErrorMessage('Capacidade de linha inválida. O valor informado deve ser maior que 0.')
+            if (!lineLength) {
+                setLineLength('0');
+            }
             return;
         }
         let items = [];
@@ -49,7 +55,7 @@ function App() {
                     <div className={"bg-slate-300 pl-3 pr-3 pt-2 pb-2 border border-slate-400 rounded-md"}>
                         <div onClick={() => {
                             if (showHelp === 'hidden') {
-                                setShowHelp('block mt-3');
+                                setShowHelp('block mt-3 text-sm md:text-md');
                             } else {
                                 setShowHelp('hidden');
                             }
@@ -83,14 +89,19 @@ function App() {
                                 <li className={"mb-2"}>
                                     Localizar na caixa do equipamento a capacidade já especificada.
                                 </li>
-                                <li className={"mb-2"}><img className={"inline-block"} src={"./box_example.jpg"} alt={"Example image."} width={"500"}/></li>
-                                <li className={"mb-2"}><span className={"font-semibold"}>Bitola da linha</span> = 0,32mm / <span className={"font-semibold"}>Capacidade</span> = 135m</li>
-                                <li className={"mb-2"}>Preencher os valores e clicar no botão <span className={"font-semibold"}>Calcular</span>.</li>
+                                <li className={"mb-2"}><img className={"inline-block"} src={"./box_example.jpg"}
+                                                            alt={"Example image."} width={"500"}/></li>
+                                <li className={"mb-2"}><span className={"font-semibold"}>Bitola da linha</span> = 0,32mm
+                                    / <span className={"font-semibold"}>Capacidade</span> = 135m
+                                </li>
+                                <li className={"mb-2"}>Preencher os valores e clicar no botão <span
+                                    className={"font-semibold"}>Calcular</span>.
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <form>
-                        <div className={"flex flex-col gap-2 items-center"}>
+                        <div className={"flex flex-col gap-5 items-center"}>
                             <div className={"flex flex-col md:flex-row md:justify-center md:items-center gap-3"}>
                                 <label htmlFor="lineDiameter">Bitola da Linha (em Milímetros - mm):</label>
                                 <input name="lineDiameter" type="number" value={lineDiameter}
@@ -114,18 +125,21 @@ function App() {
                             </button>
                         </div>
                     </form>
-                    <div className={"text-red-600 text-sm italic text-right"}>
-                        * Os valores calculados são aproximados.
-                    </div>
                     {
                         lineCapacity.length > 0 &&
-                        <Table items={lineCapacity}/>
+                        <>
+                            <div className={"text-red-600 text-sm italic text-right"}>
+                                * Os valores calculados são aproximados.
+                            </div>
+                            <Table items={lineCapacity}/>
+                        </>
                     }
                 </>
             </MainContent>
             <Footer/>
         </div>
-    );
+    )
+        ;
 }
 
 export default App;

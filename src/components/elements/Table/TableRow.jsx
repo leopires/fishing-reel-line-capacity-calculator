@@ -1,8 +1,8 @@
-function TableRow({cells}) {
+function TableRow({children}) {
     return (
         <>
             <tr className={"font-semibold"}>
-                {cells}
+                {children}
             </tr>
         </>
     );

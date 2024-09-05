@@ -6,20 +6,26 @@ import TableRowCell from "./TableRowCell";
 
 function Table({items}) {
     return (
-        <table className={"table-auto border-collapse border border-slate-100 w-full"}>
+        <table className={"table-auto border-collapse border border-slate-100 w-full mb-8"}>
             <thead>
             <tr>
-                <TableHeadCell description={"Bitola da linha (mm)"}/>
-                <TableHeadCell description={"Capacidade (m)"}/>
+                <TableHeadCell>
+                    Bitola da linha (mm)
+                </TableHeadCell>
+                <TableHeadCell>
+                    Capacidade (m)
+                </TableHeadCell>
             </tr>
             </thead>
             <tbody>
             {items.map((item) => (
-                <TableRow cells={
-                    [
-                        <TableRowCell value={`${item.bitola}mm`}/>,
-                        <TableRowCell value={`${item.capacidade}m`}/>]
-                }>
+                <TableRow>
+                    <TableRowCell>
+                        {`${item.bitola}mm`}
+                    </TableRowCell>
+                    <TableRowCell>
+                        {`${item.capacidade}m`}
+                    </TableRowCell>
                 </TableRow>
             ))}
             </tbody>
