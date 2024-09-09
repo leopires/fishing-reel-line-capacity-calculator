@@ -5,6 +5,7 @@ import Header from "./components/layout/Header/Header";
 import Footer from "./components/layout/Footer/Footer";
 import MainContent from "./components/layout/MainContent/MainContent";
 import Table from "./components/elements/Table/Table";
+import ExpandablePanel from "./components/layout/ExpandablePanel/ExpandablePanel";
 
 function App() {
 
@@ -14,7 +15,6 @@ function App() {
     const [lineCapacity, setLineCapacity] = useState([]);
 
     const [errorMessage, setErrorMessage] = useState('');
-    const [showHelp, setShowHelp] = useState('hidden');
 
     function calculate() {
         setErrorMessage('');
@@ -52,54 +52,24 @@ function App() {
             <Header/>
             <MainContent className="flex-grow">
                 <>
-                    <div className={"bg-slate-300 pl-3 pr-3 pt-2 pb-2 border border-slate-400 rounded-md"}>
-                        <div onClick={() => {
-                            if (showHelp === 'hidden') {
-                                setShowHelp('block mt-3 text-sm md:text-md');
-                            } else {
-                                setShowHelp('hidden');
-                            }
-                        }} className={"flex flex-row text-slate-700 hover:cursor-pointer"}>
-                            <div className={"flex-1"}>
-                                <h3 className={'text-xl font-semibold'}>Sobre este aplicativo</h3>
-                            </div>
-                            <div>
-                                {showHelp === 'hidden' ?
-                                    (
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                             strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                            <path strokeLinecap="round" strokeLinejoin="round"
-                                                  d="m8.25 4.5 7.5 7.5-7.5 7.5"/>
-                                        </svg>) : (
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                             strokeWidth={1.5}
-                                             stroke="currentColor" className="size-6">
-                                            <path strokeLinecap="round" strokeLinejoin="round"
-                                                  d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
-                                        </svg>
-                                    )
-                                }
-                            </div>
-                        </div>
-                        <div className={showHelp}>
-                            <p>Este aplicativo tem como objetivo fornecer um cálculo estimado da capacidade de linha em
-                                carretilhas e molinetes, para uma determinada bitola de linha.</p>
-                            <p>Para fazer o cálculo, basta seguir os seguintes passos:</p>
-                            <ul className={"list-decimal list-inside ml-2 mt-4"}>
-                                <li className={"mb-2"}>
-                                    Localizar na caixa do equipamento a capacidade já especificada.
-                                </li>
-                                <li className={"mb-2"}><img className={"inline-block"} src={"./box_example.jpg"}
-                                                            alt={"Example image."} width={"500"}/></li>
-                                <li className={"mb-2"}><span className={"font-semibold"}>Bitola da linha</span> = 0,32mm
-                                    / <span className={"font-semibold"}>Capacidade</span> = 135m
-                                </li>
-                                <li className={"mb-2"}>Preencher os valores e clicar no botão <span
-                                    className={"font-semibold"}>Calcular</span>.
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <ExpandablePanel title={'Sobre este aplicativo'}>
+                        <p>Este aplicativo tem como objetivo fornecer um cálculo estimado da capacidade de linha em
+                            carretilhas e molinetes, para uma determinada bitola de linha.</p>
+                        <p>Para fazer o cálculo, basta seguir os seguintes passos:</p>
+                        <ul className={"list-decimal list-inside ml-2 mt-4"}>
+                            <li className={"mb-2"}>
+                                Localizar na caixa do equipamento a capacidade já especificada.
+                            </li>
+                            <li className={"mb-2"}><img className={"inline-block"} src={"./box_example.jpg"}
+                                                        alt={"Example image."} width={"500"}/></li>
+                            <li className={"mb-2"}><span className={"font-semibold"}>Bitola da linha</span> = 0,32mm
+                                / <span className={"font-semibold"}>Capacidade</span> = 135m
+                            </li>
+                            <li className={"mb-2"}>Preencher os valores e clicar no botão <span
+                                className={"font-semibold"}>Calcular</span>.
+                            </li>
+                        </ul>
+                    </ExpandablePanel>
                     <form>
                         <div className={"flex flex-col gap-5 items-center"}>
                             <div className={"flex flex-col md:flex-row md:justify-center md:items-center gap-3"}>
@@ -138,8 +108,7 @@ function App() {
             </MainContent>
             <Footer/>
         </div>
-    )
-        ;
+    );
 }
 
 export default App;
