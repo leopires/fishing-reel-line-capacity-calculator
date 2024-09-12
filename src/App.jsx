@@ -62,8 +62,7 @@ function App() {
                             </li>
                             <li className={"mb-2"}><img className={"inline-block"} src={"./box_example.jpg"}
                                                         alt={"Example image."} width={"500"}/></li>
-                            <li className={"mb-2"}><span className={"font-semibold"}>Bitola da linha</span> = 0,32mm
-                                / <span className={"font-semibold"}>Capacidade</span> = 135m
+                            <li className={"mb-2"}><span className={"text-red-600"}>Bitola da linha = <span className={"font-semibold"}>0,32mm</span> / Capacidade = <span className={"font-semibold"}>135m</span></span>
                             </li>
                             <li className={"mb-2"}>Preencher os valores e clicar no botão <span
                                 className={"font-semibold"}>Calcular</span>.
